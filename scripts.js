@@ -12,7 +12,22 @@ function resetFindInGrid() {
     }
 }
 
+function resetFindInList() {
+    let tbTextToFind = document.getElementById("tbTextToFind");
+    tbTextToFind.value = '';
+
+    let spans = document.getElementsByTagName('span');
+    console.log("spans: ", spans);
+    for (let index = 0; index < spans.length; index++) {
+        spans[index].classList.remove('columnHighlighted');
+    }
+}
+
 
 function findInGrid() {
  //find in grid
+}
+
+function findInList() {
+   //find In List
 }
