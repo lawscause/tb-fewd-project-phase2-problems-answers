@@ -19,8 +19,15 @@ function resetFindInList() {
     let spans = document.getElementsByTagName('span');
     console.log("spans: ", spans);
     for (let index = 0; index < spans.length; index++) {
-        spans[index].classList.remove('columnHighlighted');
+        spans[index].classList.remove('spanHighlighted');
     }
+}
+
+
+
+function reloadPage() {
+    window.location.reload();
+    return false;
 }
 
 
@@ -30,4 +37,8 @@ function findInGrid() {
 
 function findInList() {
    //find In List
+}
+
+function sortIt() {
+    //
 }
