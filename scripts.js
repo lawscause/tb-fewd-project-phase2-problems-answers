@@ -13,9 +13,11 @@ function resetFindInGrid() {
 }
 
 function resetFindInList() {
+     //set tbTextToFind to blank
     let tbTextToFind = document.getElementById("tbTextToFind");
     tbTextToFind.value = '';
 
+    //unhighlight spans
     let spans = document.getElementsByTagName('span');
     console.log("spans: ", spans);
     for (let index = 0; index < spans.length; index++) {
