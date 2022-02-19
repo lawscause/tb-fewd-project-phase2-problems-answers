@@ -180,14 +180,25 @@ var sortSpansInDiv = function (div1, div2) {
 }
 
 function sortIt() {
-    sortItVer3();
+    sortItVer4();
 }
 
 function sortItVer1() {
+    let newRow = document.createElement('div');
+    newRow.id = "row0";
+    newRow.className = "row";
+
+    let row0 = document.getElementById("row0");
+    console.log(row0);
+    let pDiv = row0.parentNode;
+    console.log(pDiv);
+
     console.log("using sortItVer1()");
     //grab a reference to the resultsRow where
     //I will place the sorted columns
     let resultsRow = document.getElementById("resultsRow");
+    
+
 
     //create an array to hold the columns
     let arrayOfColumns = [];
@@ -211,12 +222,19 @@ function sortItVer1() {
     arrayOfColumns.sort(sortSpansInDiv);
     //show the arrayOfColumns after I sort it in the console.log
     console.log("arrayOfColumns sorted: ", arrayOfColumns);
-
+/*
     //add the now sorted columns from the array into the resultsRow
     for (let index = 0; index < arrayOfColumns.length; index++) {
         resultsRow.appendChild(arrayOfColumns[index]);
         console.log("resultsRow: ", resultsRow);
     }
+*/
+    for (let index = 0; index < arrayOfColumns.length; index++) {
+        newRow.appendChild(arrayOfColumns[index]);
+        console.log("newRow: ", newRow);
+    }
+
+    row0.replaceWith(newRow);
 }
 
 //sort the columns in the original row and place them in the resultsRow
@@ -296,7 +314,7 @@ function bblSort(parentDiv, spans ){
             // is greater than the next iteration
             if(spans[j].innerText > spans[j+1].innerText){
                 // If the condition is true then insert the one after before this one
-                parentDiv.insertBefore(spans[j + 1].parentNode, spans[j].parentNode);
+                //parentDiv.insertBefore(spans[j + 1].parentNode, spans[j].parentNode);
             }
             
         }
@@ -305,4 +323,47 @@ function bblSort(parentDiv, spans ){
     }
         // Print the sorted array
         console.log(spans);
+}
+
+//https://developer.mozilla.org/en-US/docs/Web/API/Element/replaceWith
+function sortItVer4() {
+    console.log("using sortItVer4()");
+
+    let newRow = document.createElement('div');
+    newRow.id = "row0";
+    newRow.className = "row";
+
+    let row0 = document.getElementById("row0");
+    console.log(row0);
+
+    //create an array to hold the columns
+    let arrayOfColumns = [];
+    //get the divs where the class is column
+    const listOfColumnDivElements = document.querySelectorAll("div.column");
+    //show the columns in the console log
+    console.log("listOfColumnDivElements: ", listOfColumnDivElements);
+    //place each div with the class column into the arrayOfColumns
+    //by looping through the listOfColumnDivElements
+    for (let index = 0; index < listOfColumnDivElements.length; index++) {
+        arrayOfColumns.push(listOfColumnDivElements[index]);
+        console.log("listOfColumnDivElements[index].children[0]: ", listOfColumnDivElements[index].children[0].innerText);
+    }
+
+    //show the arrayOfColumns before I sort it in the console.log
+    console.log("arrayOfColumns pre-sorted: ", arrayOfColumns);
+    
+    //sort the array by using the sort method.
+    //supply the sort method with a function that finds the text in the span 
+    //within the div and uses that as the values to sort by
+    arrayOfColumns.sort(sortSpansInDiv);
+    //show the arrayOfColumns after I sort it in the console.log
+    console.log("arrayOfColumns sorted: ", arrayOfColumns);
+
+    for (let index = 0; index < arrayOfColumns.length; index++) {
+        newRow.appendChild(arrayOfColumns[index]);
+        console.log("newRow: ", newRow);
+    }
+
+    //replace the div row0 with the newRow that contains the sorted values
+    row0.replaceWith(newRow);
 }
