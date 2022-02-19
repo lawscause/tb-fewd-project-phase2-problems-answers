@@ -180,7 +180,7 @@ var sortSpansInDiv = function (div1, div2) {
 }
 
 function sortIt() {
-    sortItVer1();
+    sortItVer3();
 }
 
 function sortItVer1() {
@@ -266,4 +266,43 @@ function sortItVer2() {
         resultsRow.appendChild(pElement);
         console.log("resultsRow: ", resultsRow);
     }
+}
+
+
+//https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore
+function sortItVer3() {
+
+    let parentDiv = document.querySelector(".column").parentNode;
+
+    //get a collection of all the spans
+    let spans = document.getElementsByTagName('span');
+    bblSort(parentDiv, spans);
+}
+
+// Bubble sort Implementation using Javascript
+// Creating the bblSort function
+function bblSort(parentDiv, spans ){
+	
+    for(var i = 0; i < spans.length; i++){
+        console.log("i: ", i);
+        
+        // Last i elements are already in place
+        for(var j = 0; j < ( spans.length - i -1 ); j++){
+            console.log("j: ", j);
+
+            console.log("spans[j].innerText: ", spans[j].innerText );
+            console.log("spans[j+1].innerText:  ", spans[j+1].innerText);
+            // Checking if the item at present iteration
+            // is greater than the next iteration
+            if(spans[j].innerText > spans[j+1].innerText){
+                // If the condition is true then insert the one after before this one
+                parentDiv.insertBefore(spans[j + 1].parentNode, spans[j].parentNode);
+            }
+            
+        }
+        //get the new values of the span
+        spans = document.getElementsByTagName('span');
+    }
+        // Print the sorted array
+        console.log(spans);
 }
